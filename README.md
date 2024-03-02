@@ -16,3 +16,5 @@ First we have to add it to decoding truth table(`lab2/Dec_tt.csv`) and ALU truth
 Solution: observe that each R-type operator has its I-type one, for simplicity, just use 'func' field to 
 tell them apart.  
 Workflow: `aludec.sv` $\rightarrow$ `controller.sv`.
+## Adding bne
+Add a new field `branchsrc` to controller will work. Truth tables are updated.
