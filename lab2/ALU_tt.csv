@@ -1,0 +1,8 @@
+ALUop, funct, ALUControl
+00, X, 010(add)
+x1, X, 110(minus)
+1x, 100000(add), 010
+1x, 100010(sub), 110
+1x, 100100(and), 000
+1x, 100101(or),  001
+1x, 101010(slt), 111

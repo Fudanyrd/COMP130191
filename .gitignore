@@ -1,0 +1,17 @@
+# usually .dat .txt file are used for testing.
+*.dat
+*.txt
+
+# these files are created by Vivado.
+*.cache
+*.hw
+*.ip_user_files
+*.sim
+*.xpr
+
+# zip is part of archives.
+*.zip
+archive
+
+# Makefile will be useful; but it's not part of project
+Makefile

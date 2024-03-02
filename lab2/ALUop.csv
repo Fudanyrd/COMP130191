@@ -1,0 +1,5 @@
+ALUop, meaning
+00, sum
+01, minus
+10, depends on func
+11, not defined
