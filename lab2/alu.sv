@@ -10,6 +10,7 @@ module alu(
   input  logic[31:0] srca,
   input  logic[31:0] srcb,
   input  logic[2:0]  alucontrol,
+  input  logic[1:0]  branchsrc,
   output logic[31:0] aluout,
   output logic zero
 );
@@ -36,7 +37,15 @@ module alu(
       3'b111: aluout <= {31'b0, lt};
       default: aluout <= 32'bxxxx_xxxx_xxxx_xxxx_xxxx_xxxx_xxxx_xxxx;
     endcase   
-    zero <= (srca == srcb);
+
+    case (branchsrc)
+      // beq
+      2'b00: zero <= (srca == srcb);
+      // bne
+      2'b11: zero <= (srca != srcb);
+      // not branch operator!
+      default:  zero <= '0;
+    endcase
   end
   /** How to set the value of zero? */
   // first attempt:

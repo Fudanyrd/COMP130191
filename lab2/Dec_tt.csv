@@ -1,9 +1,10 @@
-instruction, opcode, RegWrite, RegDst, ALUSrc, Branch, MemWrite, MemtoReg, ALUop, jump
-R-type, 000000, 1, 1, 0, 0, 0, 0, 10, 0
-lw, 100011, 1, 0, 1, 0, 0, 1, 00, 0
-sw, 101011, 0, x, 1, 0, 1, x, 00, 0
-beq, 000100, 0, x, 0, 1, 0, x, 01, 0
-addi, 001000, 1, 0, 1, 0, 0,0, 00, 0
-ori, 001101, 1, 0, 1, 0, 0, 0, 00, 0
-andi, 001100, 1, 0, 1, 0, 0, 0, 00, 0
-j, 000010, 0, x, x, x, 0, x, xx, 1
+instruction, opcode, RegWrite, RegDst, ALUSrc, Branch, MemWrite, MemtoReg, ALUop, jump, branchsrc
+R-type, 000000, 1, 1, 0, 0, 0, 0, 10, 0, xx
+lw, 100011, 1, 0, 1, 0, 0, 1, 00, 0, xx
+sw, 101011, 0, x, 1, 0, 1, x, 00, 0, xx
+beq, 000100, 0, x, 0, 1, 0, x, 01, 0, 00
+bne, 000101, 0, x, 0, 1, 0, x, 01, 0, 11
+addi, 001000, 1, 0, 1, 0, 0,0, 00, 0, xx
+ori, 001101, 1, 0, 1, 0, 0, 0, 00, 0, xx
+andi, 001100, 1, 0, 1, 0, 0, 0, 00, 0, xx
+j, 000010, 0, x, x, x, 0, x, xx, 1, xx

@@ -8,7 +8,8 @@ module controller(
   output logic pcsrc, alusrc,
   output logic regdst, regwrite,
   output logic jump,
-  output logic[2:0] alucontrol
+  output logic[2:0] alucontrol,
+  output logic[1:0] branchsrc
 );
   logic[1:0] aluop;
   logic[5:0] func_backup;
@@ -26,7 +27,8 @@ module controller(
     branch, alusrc,
     regdst, regwrite,
     jump,
-    aluop
+    aluop,
+    branchsrc
   );
   aludec ad(
     func_backup,

@@ -7,6 +7,7 @@ module datapath(
   input  logic alusrc, regdst,
   input  logic regwrite, jump,
   input  logic[2:0] alucontrol,
+  input  logic[1:0] branchsrc,
   output logic zero,
   output logic[31:0] pc,
   input  logic[31:0] instr,
@@ -90,6 +91,7 @@ module datapath(
     srca,
     srcb,
     alucontrol,
+    branchsrc,
     aluout,
     zero
   );

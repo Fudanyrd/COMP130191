@@ -20,6 +20,7 @@ module mips(
   logic pcsrc;
   logic zero;
   logic[2:0] alucontrol;
+  logic[1:0] branchsrc;
 
   // control logic
   controller c(
@@ -29,7 +30,8 @@ module mips(
     pcsrc, alusrc,
     regdst, regwrite,
     jump,
-    alucontrol
+    alucontrol,
+    branchsrc
   );
 
   // datapath logic
@@ -39,6 +41,7 @@ module mips(
     alusrc, regdst,
     regwrite, jump,
     alucontrol,
+    branchsrc,
     zero, 
     pc,
     instr,

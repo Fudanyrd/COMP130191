@@ -8,10 +8,11 @@ module maindec(
   output logic branch, alusrc,   
   output logic regdst, regwrite,
   output logic jump,
-  output logic[1:0] aluop
+  output logic[1:0] aluop,
+  output logic[1:0] branchsrc
 );
   /** YOUR CODE HERE */
-  logic[8:0] controls;
+  logic[10:0] controls;
   // unpack the instruction.
   assign {
     regwrite,
@@ -21,7 +22,8 @@ module maindec(
     memwrite,
     memtoreg,  // 6
     jump,
-    aluop      // 8-9
+    aluop,      // 8-9
+    branchsrc
   } = controls;
 
   // set each field of control to what they should be.
@@ -29,23 +31,25 @@ module maindec(
   begin
     case (op) 
       // R-type:
-      6'b000000: controls <= 9'b110_000_010; // why?
+      6'b000000: controls <= 11'b110_000_010_10; // why?
       // lw
-      6'b100011: controls <= 9'b101_001_000;
+      6'b100011: controls <= 11'b101_001_000_10;
       // sw
-      6'b101011: controls <= 9'b001_010_000;
+      6'b101011: controls <= 11'b001_010_000_10;
       // beq
-      6'b000100: controls <= 9'b000_100_001;
+      6'b000100: controls <= 11'b000_100_001_00;
+      // bne
+      6'b000101: controls <= 11'b000_100_001_11;
       // addi
-      6'b001000: controls <= 9'b101_000_000;
+      6'b001000: controls <= 11'b101_000_000_10;
       // ori
-      6'b001101: controls <= 9'b101_000_000;
+      6'b001101: controls <= 11'b101_000_000_10;
       // andi
-      6'b001100: controls <= 9'b101_000_000;
+      6'b001100: controls <= 11'b101_000_000_10;
       // j
-      6'b000010: controls <= 9'b000_000_100;
+      6'b000010: controls <= 11'b000_000_100_10;
       // illegal opt
-      default:   controls <= 9'bxxxxxxxxx;
+      default:   controls <= 11'bxxxxxxxxxxx;
     endcase
   end
 endmodule
