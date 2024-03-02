@@ -15,3 +15,8 @@ archive
 
 # Makefile will be useful; but it's not part of project
 Makefile
+
+# my own lab report should not be visible
+*.doc
+*.docx
+*.pdf
