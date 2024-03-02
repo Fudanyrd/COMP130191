@@ -11,9 +11,15 @@ module controller(
   output logic[2:0] alucontrol
 );
   logic[1:0] aluop;
+  logic[5:0] func_backup;
   logic branch;
 
   /** YOUR CODE HERE */
+  itorfunc itor (
+    op,
+    funct,
+    func_backup
+  );
   maindec md(
     op,
     memtoreg, memwrite,
@@ -23,9 +29,10 @@ module controller(
     aluop
   );
   aludec ad(
-    funct,
+    func_backup,
     aluop, 
     alucontrol
   );
+
   assign pcsrc = branch & zero;
 endmodule

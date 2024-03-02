@@ -10,8 +10,8 @@ module aludec(
 );
   always_comb
     case(aluop)
-      // add (for lw, sw, addi)
-      2'b00: alucontrol <= 3'b010;
+      // add (for lw, sw, addi) is merged into 'default' branch
+      // 2'b00: alucontrol <= 3'b010;
       // sub (for beq)
       2'b01: alucontrol <= 3'b110;
       default:

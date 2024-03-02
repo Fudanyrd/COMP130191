@@ -38,6 +38,10 @@ module maindec(
       6'b000100: controls <= 9'b000_100_001;
       // addi
       6'b001000: controls <= 9'b101_000_000;
+      // ori
+      6'b001101: controls <= 9'b101_000_000;
+      // andi
+      6'b001100: controls <= 9'b101_000_000;
       // j
       6'b000010: controls <= 9'b000_000_100;
       // illegal opt
