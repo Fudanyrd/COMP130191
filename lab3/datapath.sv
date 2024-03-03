@@ -13,12 +13,13 @@ module datapath(
   input  logic regdst,          // which field of instruction is destination?
   input  logic memtoreg,        // which result to write to register?
   input  logic regwrite,        // RegWrite: write to register file?
-  output logic[31:0] writedata, // what to write to DMEM? (pass to Memory:wd)     
+  output logic[31:0] writedata, // what to write to DMEM? (pass to Memory:wd)    
+                                // used by memory! 
   input  logic alusrca,         // use register or pc as input?
   input  logic[1:0] alusrcb,    // use register or immediate as input?
   input  logic[2:0] alucontrol, // alu control signal
   output logic zero,
-  input  logic pcsrc,           // use aluresult or aluout as pc value?
+  input  logic[1:0] pcsrc,      // use aluresult or aluout as pc value?
   input  logic pcen,            // enable pc write?
   output logic[31:0] aluout,    // new alu output
   output logic[31:0] pc         // new pc value
@@ -47,10 +48,11 @@ module datapath(
 
   /** PC Related */
   logic[31:0] pcdash;  // ie. PC' in the figure.
+  logic[25:0] label;
 
   /** First: PC Control Logic! */
-  mux2 #(32) PCSrc(
-    aluresult, aluout,
+  mux4 #(32) PCSrc(
+    aluresult, aluout, {pc[31:28], label[25:0], 2'b00}, 32'bxxxx_xxxx_xxxx_xxxx_xxxx_xxxx_xxxx_xxxx,
     pcsrc,
     pcdash 
   );
@@ -143,5 +145,6 @@ module datapath(
     funct <= instruction[5:0];
     // immediates
     imm16 <= instruction[15:0];
+    label <= instruction[25:0];
   end
 endmodule
