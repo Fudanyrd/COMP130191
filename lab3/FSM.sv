@@ -171,7 +171,7 @@ module FSM(
         memwrite <= 1'b0;
         irwrite <= 1'b0;
         regdst <= 1'b1;     // set
-        memtoreg <= 1'b1;   // set
+        memtoreg <= 1'b0;   // set
         regwrite <= 1'b1;   // set
         alusrca <= 1'b0;     
         alusrcb <= 2'b00;    

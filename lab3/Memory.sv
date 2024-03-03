@@ -24,7 +24,7 @@ module Memory(
   // initialize InstrRAM.
   initial
     // replace the filename here with the file for testing.
-    $readmemh("filename.dat");
+    $readmemh("memfile.dat", InstrRAM);
 
   assign rd = IorD ? DataRAM[addr[31:2]] : InstrRAM[pc];
   always_ff @(posedge clk)
