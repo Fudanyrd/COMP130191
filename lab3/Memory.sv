@@ -26,7 +26,7 @@ module Memory(
     // replace the filename here with the file for testing.
     $readmemh("memfile.dat", InstrRAM);
 
-  assign rd = IorD ? DataRAM[addr[31:2]] : InstrRAM[pc];
+  assign rd = IorD ? DataRAM[addr[31:2]] : InstrRAM[pc[7:2]];
   always_ff @(posedge clk)
     begin
       // if IorD is 0(instruction), definitely not write!

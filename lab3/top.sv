@@ -4,10 +4,11 @@
 module top(
   input logic clk, reset,
   output logic[31:0] writedata, dataadr,
+  output logic iord,
   output logic memwrite
 );
   logic[31:0] pc, readdata;
-  logic iord;
+  // logic iord;
   // processor!
   mips process(
     clk, reset,

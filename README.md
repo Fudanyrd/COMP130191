@@ -1,5 +1,5 @@
 # This is solution to labs of COMP130191.03!
-This is what this repository is all about. 
+Progress: currently at the beginning of lab 4.
 
 # Disclaimer
 Since I have limited knowledge of Computer Architecture, there may be bugs in my solution.
@@ -20,4 +20,4 @@ Workflow: `aludec.sv` $\rightarrow$ `controller.sv`.
 Add a new field `branchsrc` to controller will work. Truth tables are updated.
 
 # Lab 3
-I'm still working on it, please be patient...
+Done.

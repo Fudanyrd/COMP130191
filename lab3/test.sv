@@ -6,12 +6,14 @@ module testbench(
 
   logic[31:0] writedata, dataadr;
   logic memwrite;
+  logic iord;     // for debugging
 
   // instantiate device to be tested
   top dut(
     clk, reset,
     writedata,
     dataadr,
+    iord,       // for debugging
     memwrite
   );
 
