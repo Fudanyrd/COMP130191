@@ -8,6 +8,7 @@
 *.ip_user_files
 *.sim
 *.xpr
+*.runs
 
 # zip is part of archives.
 *.zip

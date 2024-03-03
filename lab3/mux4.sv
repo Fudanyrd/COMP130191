@@ -10,10 +10,6 @@ module mux4 #(parameter WIDTH=32)
   input  logic[1:0] src,        // selector
   output logic[WIDTH-1:0] s
 );
-  case (src)
-    2'b00:  assign s = d00;
-    2'b01:  assign s = d01;
-    2'b10:  assign s = d10;
-    2'b11:  assign s = d11;
-  endcase
+  assign s = src[1] ? (src[0] ? d11 : d10) 
+                    : (src[0] ? d01: d00);
 endmodule
