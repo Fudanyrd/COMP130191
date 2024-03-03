@@ -18,3 +18,6 @@ tell them apart.
 Workflow: `aludec.sv` $\rightarrow$ `controller.sv`.
 ## Adding bne
 Add a new field `branchsrc` to controller will work. Truth tables are updated.
+
+# Lab 3
+I'm still working on it, please be patient...
