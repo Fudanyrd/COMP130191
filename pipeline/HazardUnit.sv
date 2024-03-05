@@ -41,19 +41,19 @@ module HazardUnit(
   /** ForwardAE, ForwardBE */
   always_comb
   begin
-  if ((rse != 5'b0) & (rse == writeregm) & regwritem) assign forwardae = 2'b10;
-  else if ((rse != 5'b0) & (rse == writeregw) & regwritew) assign forwardae = 2'b01;
-  else assign forwardae = 2'b00;
-  if ((rte != 5'b0) & (rte == writeregm) & regwritem) assign forwardbe = 2'b10;
-  else if ((rte != 5'b0) & (rte == writeregw) & regwritew) assign forwardbe = 2'b01;
-  else assign forwardbe = 2'b00;
+  if ((rse != 5'b0) & (rse == writeregm) & regwritem) forwardae = 2'b10;
+  else if ((rse != 5'b0) & (rse == writeregw) & regwritew) forwardae = 2'b01;
+  else forwardae = 2'b00;
+  if ((rte != 5'b0) & (rte == writeregm) & regwritem) forwardbe = 2'b10;
+  else if ((rte != 5'b0) & (rte == writeregw) & regwritew) forwardbe = 2'b01;
+  else forwardbe = 2'b00;
 
   /** ForwardAD, ForwardBD */
-  assign forwardad = (rsd != 5'd0) & (rsd == writeregm) & regwritem;
-  assign forwardbd = (rtd != 5'd0) & (rtd == writeregm) & regwritem;
+  forwardad = (rsd != 5'd0) & (rsd == writeregm) & regwritem;
+  forwardbd = (rtd != 5'd0) & (rtd == writeregm) & regwritem;
 
   /** stallF, stallD, FlushE */
-  assign addi = op == 6'b001000;
+  addi = op == 6'b001_000;
   /** 
    * NOTE: 
    *
@@ -65,18 +65,18 @@ module HazardUnit(
    * if rtd depends on rte(i.e. if the source operand depends on 'lw' result). 
    * As for 'addi', the answer is no! So I made the following changes:
    */
-  assign lwstall = ((rsd == rte) | (rtd == rte & ~addi)) & memtorege;
-  //                                           ^^^^^^^^
-  assign branchstall = branchd & regwritee & (writerege == rsd | (writerege == rtd)) 
-                     | branchd & memtoregm & (writeregm == rsd | (writeregm == rtd));
+  lwstall = ((rsd == rte) | (rtd == rte & ~addi)) & memtorege;
+  //                                     ^^^^^^^^
+  branchstall = branchd & regwritee & (writerege == rsd | (writerege == rtd)) 
+              | branchd & memtoregm & (writeregm == rsd | (writeregm == rtd));
   /**
    * Also note that if we want to add 'j' to pipeline, the new 'pc' value can be computed
    * at Decode stage. Thus do not need to stall(i.e. stallf = stalld = false), but we
    * still have to flush the pipeline(otherwise the rsd, rtd will just be fed forward and wreak havoc...)
    */
-  assign stalld = lwstall | branchstall;
-  assign stallf = stalld;
-  assign flushe = stallf | jump; 
-  //                     ^^^^^^^
+  stalld = lwstall | branchstall;
+  stallf = lwstall | branchstall;
+  flushe = lwstall | branchstall | jump; 
+  //              ^^^^^^^
   end
 endmodule
