@@ -112,6 +112,7 @@ module datapath(
   Register #(32) PC(
     clk, reset,
     ~stallf,
+    pc2,
     pcf
   );
   adder PCPlus4(
