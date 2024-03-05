@@ -12,6 +12,7 @@ get some idea.
 
 # Lab 2
 ## Adding ori
+![Simulation](lab2.png)
 First we have to add it to decoding truth table(`lab2/Dec_tt.csv`) and ALU truth table(`lab2/ALU_tt.csv`).
 Solution: observe that each R-type operator has its I-type one, for simplicity, just use 'func' field to 
 tell them apart.  
@@ -20,9 +21,11 @@ Workflow: `aludec.sv` $\rightarrow$ `controller.sv`.
 Add a new field `branchsrc` to controller will work. Truth tables are updated.
 
 # Lab 3
+![Simulation](lab3.png)
 Done. Think about how you can leverage figure `7-42` on page `254` to make this task easier.
 
 # Pipeline
+![Simulation](pipeline.png)
 **NOTE**: This lab is not named `Lab 4` since our distinguished TAs haven't decide the handout of lab 4.  
 You may look at comments in `pipeline/HazardUnit.sv` and `pipeline/datapath.sv` for some hints. They are largely the pitfalls I've met...
 

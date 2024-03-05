@@ -9,6 +9,6 @@ module imem(
   logic[31:0] RAM[63:0];
 
   initial
-    $readmemh("memfile3.dat", RAM);
+    $readmemh("memfile.dat", RAM);
   assign rd = RAM[a];
 endmodule
