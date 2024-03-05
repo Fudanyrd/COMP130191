@@ -46,7 +46,9 @@ module datapath(
   output logic memtoregm,
   output logic regwritem,
   output logic[4:0] writeregw,
-  output logic regwritew
+  output logic regwritew,
+  /** For Debugging */
+  output logic[2:0] alucontrole
 );
   // Fetch stage
   logic[31:0] readdataw, aluoutw;
@@ -63,7 +65,6 @@ module datapath(
   logic[15:0] instrd16;
   logic[31:0] signimmd, signimmdsh;
   logic memwritee;
-  logic[2:0] alucontrole;
   logic alusrce;
   logic regdste;
   logic[31:0] lefte, righte;

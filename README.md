@@ -1,5 +1,5 @@
 # This is solution to labs of COMP130191.03!
-Progress: currently at the beginning of lab 4.
+Progress: currently debugging the pipeline.
 
 # Disclaimer
 Since I have limited knowledge of Computer Architecture, there may be bugs in my solution.

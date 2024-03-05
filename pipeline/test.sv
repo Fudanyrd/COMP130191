@@ -6,13 +6,15 @@ module testbench(
 
   logic[31:0] writedata, dataadr;
   logic memwrite;
+  logic[2:0] alucontrol;
 
   // instantiate device to be tested
   top dut(
     clk, reset,
     writedata,
     dataadr,
-    memwrite
+    memwrite,
+    alucontrol
   );
 
   // initialize test
