@@ -8,10 +8,11 @@ module controller(
   output logic pcsrc, alusrc,
   output logic regdst, regwrite,
   output logic jump,
+  output logic branch,               // i.e. branchd, maybe used by Hazard Unit.
   output logic[2:0] alucontrol
 );
   logic[1:0] aluop;
-  logic branch;
+  // zero: a.k.a 'EqualD'
 
   /** YOUR CODE HERE */
   maindec md(
