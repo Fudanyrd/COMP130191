@@ -127,9 +127,17 @@ module datapath(
     instrd16,
     signimmd
   );
-  Register #(64) InstrReg(
+  /**
+   * Important Note:
+   * 
+   * `pcsrcd` alone won't work properly for 'j' command.
+   * The reason is that in the decoding stage, the register is
+   * already loaded with next instruction to run, so we must clear it.
+   * Hence, the CLR condition of InstrReg is `pcsrcd OR jump`.
+   */
+  FlushReg #(64) InstrReg(
     clk, reset,
-    ~stalld,
+    ~stalld, pcsrcd | jump, 64'h0000_0020_0000_0000,
     {
       rdf,
       pcplus4f
@@ -160,9 +168,10 @@ module datapath(
     signimmdsh, pcplus4d,
     pcbranchd
   );
-  Register #(119) DEReg(
-    clk, reset | flushe,
-    1'b1,
+  FlushReg #(119) DEReg(
+    clk, reset,
+    1'b1, flushe,
+    '0,
     {
       regwrited,
       memtoregd,

@@ -66,7 +66,7 @@ module HazardUnit(
    * As for 'addi', the answer is no! So I made the following changes:
    */
   lwstall = ((rsd == rte) | (rtd == rte & ~addi)) & memtorege;
-  //                                     ^^^^^^^^
+  //                                    ^^^^^^^^
   branchstall = branchd & regwritee & (writerege == rsd | (writerege == rtd)) 
               | branchd & memtoregm & (writeregm == rsd | (writeregm == rtd));
   /**
@@ -77,6 +77,6 @@ module HazardUnit(
   stalld = lwstall | branchstall;
   stallf = lwstall | branchstall;
   flushe = lwstall | branchstall | jump; 
-  //              ^^^^^^^
+  //                             ^^^^^^^
   end
 endmodule
