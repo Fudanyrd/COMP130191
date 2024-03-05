@@ -11,8 +11,8 @@ get some idea.
 *Reading the fucking manual* will be of great help.
 
 # Lab 2
-## Adding ori
 ![Simulation](lab2.png)
+## Adding ori
 First we have to add it to decoding truth table(`lab2/Dec_tt.csv`) and ALU truth table(`lab2/ALU_tt.csv`).
 Solution: observe that each R-type operator has its I-type one, for simplicity, just use 'func' field to 
 tell them apart.  
