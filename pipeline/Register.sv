@@ -13,8 +13,8 @@ module Register #(parameter WIDTH = 32 /*may be 64*/)
   /** YOUR CODE HERE */
   logic[WIDTH-1:0] dat;  // will need some way to retain previous signal
   // sychronous control
-  always_ff @(posedge clk, posedge reset)
-    if (reset) dat <= 0;
+  always_ff @(posedge clk)
+    if (reset) dat <= '0;
     else 
     if (we)  // if write enabled.
       begin
