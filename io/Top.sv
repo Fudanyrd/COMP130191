@@ -5,17 +5,22 @@ module Top(
   input  logic BTNR,
   input  logic[15:0] SW,
   output logic[7:0] AN,
-  output logic[6:0] A2G
-):
-  logic[31:0] pc;
+  output logic[6:0] A2G,
+  output logic[31:0] pc
+);
+  // logic[31:0] pc;
   logic[31:0] instr;
+  imem imem(
+    (pc[7:2]),
+    (instr)
+  );
 
   logic Write;
   logic[31:0] dataAdr;
   logic[31:0] writeData;
   logic[31:0] readData;
 
-  MIPS mips(
+  mips mips(
     .clk(CLK100MHZ),
     .reset(BTNC),
     .pc(pc),                   // output
@@ -23,16 +28,15 @@ module Top(
     .memwrite(Write),
     .aluout(dataAdr),          // output
     .writedata(writeData),     // output
-    .readData(readData)
+    .readdata(readData)
   );
 
   dmemDec ddc(
     .clk(CLK100MHZ),
     .writeEN(Write),
-    .addr(dataAdr[7:0]),
+    .dataAdr(dataAdr),
     .writeData(writeData),
     .readData(readData),       // output
-    .IOclock(~CLK100MHZ),
     .reset(BTNC),
     .btnL(BTNL),
     .btnR(BTNR),

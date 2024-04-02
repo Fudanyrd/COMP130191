@@ -1,6 +1,6 @@
 `timescale 1ns / 1ps
 
-module testbench():
+module testbench();
     logic CLK100MHZ;
     logic BTNC;        // reset
     logic BTNL;        // left operand ?
@@ -9,15 +9,17 @@ module testbench():
     logic[15:0] SW;
     logic[7:0] AN;
     logic[6:0] A2G;
+    logic[31:0] pc;
 
     Top T(
         CLK100MHZ,
         BTNC,
         BTNL,
-        BTNR;
+        BTNR,
         SW,
         AN,
-        A2G
+        A2G,
+        pc
     );
 
     initial begin
