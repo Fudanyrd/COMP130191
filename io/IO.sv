@@ -47,8 +47,8 @@ module IO(
     always_comb begin
       if (pRead) begin
         case (addr)
-          2'b11:  pReadData = {24'b0, switch[15:8]};
-          2'b10:  pReadData = {24'b0, switch[7:0]};
+          2'b11:  pReadData = {24'b0, switch1[15:8]};
+          2'b10:  pReadData = {24'b0, switch1[7:0]};
           2'b00:  pReadData = {24'b0, 6'b0, status};
           default: pReadData = 32'b0;
         endcase

@@ -14,9 +14,9 @@ module itorfunc(
   always_comb
     case (op)
       // addi, lw, sw should yield the same output: add!
-      6'b001000: funct <= 6'bx100_000;
-      6'b100011: funct <= 6'bx100_000;
-      6'b101011: funct <= 6'bx100_000;
+      6'b001000: funct <= 6'b100_000;
+      6'b100011: funct <= 6'b100_000;
+      6'b101011: funct <= 6'b100_000;
       // ori
       6'b001101: funct <= 6'b100_101;
       // andi

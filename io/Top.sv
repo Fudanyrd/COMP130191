@@ -5,10 +5,10 @@ module Top(
   input  logic BTNR,
   input  logic[15:0] SW,
   output logic[7:0] AN,
-  output logic[6:0] A2G,
-  output logic[31:0] pc
+  output logic[6:0] A2G
+  // output logic[31:0] pc
 );
-  // logic[31:0] pc;
+  logic[31:0] pc;
   logic[31:0] instr;
   imem imem(
     (pc[7:2]),
