@@ -23,7 +23,8 @@ module FSM(
   output logic alusrca,
   output logic[1:0] alusrcb,
   output logic[1:0] aluop,   // pass it to alu decoder to get alucontrol.  
-  output logic branch
+  output logic branch,
+  output logic branchsrc     // 0: beq(state id=8) 1: bne(state id=12)
 );
   always_comb
   begin
@@ -60,6 +61,7 @@ module FSM(
         alusrcb <= 2'b11;   // set
         aluop <= 2'b00;     // set
         branch <= 1'b0;
+        branchsrc <= 1'b0;
         case (op)
           // lw
           6'b100011: ns <= 4'd2;
@@ -69,8 +71,14 @@ module FSM(
           6'b000000: ns <= 4'd6;
           // beq
           6'b000100: ns <= 4'd8;
+          // bne
+          6'b000_101: ns <= 4'd12;
           // addi
           6'b001000: ns <= 4'd9;
+          // andi
+          6'b001100: ns <= 4'd13;
+          // ori
+          6'b001101: ns <= 4'd13;
           // j
           6'b000010: ns <= 4'd11;
           default: ns <= 4'd0;
@@ -90,6 +98,7 @@ module FSM(
         alusrcb <= 2'b10;    // set
         aluop <= 2'b00;      // set
         branch <= 1'b0;
+        branchsrc <= 1'b0;
         case (op)
           // lw
           6'b100011: ns <= 4'd3;
@@ -113,6 +122,7 @@ module FSM(
         alusrcb <= 2'b00;    
         aluop <= 2'b00;      
         branch <= 1'b0;
+        branchsrc <= 1'b0;
       end
       // State 4: Mem Writeback
       4'd4: begin
@@ -129,6 +139,7 @@ module FSM(
         alusrcb <= 2'b00;    
         aluop <= 2'b00;      
         branch <= 1'b0;
+        branchsrc <= 1'b0;
       end
       // State 5: MemWrite
       4'd5: begin
@@ -145,6 +156,7 @@ module FSM(
         alusrcb <= 2'b00;    
         aluop <= 2'b00;      
         branch <= 1'b0;
+        branchsrc <= 1'b0;
       end
       // State 6: Execution
       4'd6: begin 
@@ -161,6 +173,7 @@ module FSM(
         alusrcb <= 2'b00;   // set    
         aluop <= 2'b10;     // set      
         branch <= 1'b0;
+        branchsrc <= 1'b0;
       end
       // State 7: ALU Writeback
       4'd7: begin
@@ -177,8 +190,9 @@ module FSM(
         alusrcb <= 2'b00;    
         aluop <= 2'b00;      
         branch <= 1'b0;
+        branchsrc <= 1'b0;
       end
-      // State 8: Branch!
+      // State 8: Branch equal!
       4'd8: begin
         ns <= 4'd0;
         pcwrite <= 1'b0;
@@ -193,6 +207,41 @@ module FSM(
         alusrcb <= 2'b00;   // set    
         aluop <= 2'b01;     // set      
         branch <= 1'b1;     // set
+        branchsrc <= 1'b0;
+      end
+      // State 12: Branch not equal!
+      4'd12: begin
+        ns <= 4'd0;
+        pcwrite <= 1'b0;
+        pcsrc <= 2'b01;    // set
+        iord <= 1'b0;
+        memwrite <= 1'b0;
+        irwrite <= 1'b0;
+        regdst <= 1'b0;
+        memtoreg <= 1'b0;
+        regwrite <= 1'b0;
+        alusrca <= 1'b1;    // set     
+        alusrcb <= 2'b00;   // set    
+        aluop <= 2'b01;     // set      
+        branch <= 1'b1;     // set
+        branchsrc <= 1'b1;  // set
+      end
+      // State 13: for andi and ori!
+      4'd13: begin
+        ns <= 4'd10;        // set, same as addi, write back.
+        pcwrite <= 1'b0;
+        pcsrc <= 2'b00;
+        iord <= 1'b0;
+        memwrite <= 1'b0;
+        irwrite <= 1'b0;
+        regdst <= 1'b0;
+        memtoreg <= 1'b0;
+        regwrite <= 1'b0;
+        alusrca <= 1'b1;     // set     
+        alusrcb <= 2'b10;    // set
+        aluop <= 2'b10;      // set
+        branch <= 1'b0;
+        branchsrc <= 1'b0;
       end
       // State 9: addi execution!
       4'd9: begin
@@ -209,6 +258,7 @@ module FSM(
         alusrcb <= 2'b10;    // set
         aluop <= 2'b00;      // set
         branch <= 1'b0;
+        branchsrc <= 1'b0;
       end
       // State 10: addi write-back
       4'd10: begin
@@ -225,6 +275,7 @@ module FSM(
         alusrcb <= 2'b00;    
         aluop <= 2'b00;      
         branch <= 1'b0;
+        branchsrc <= 1'b0;
       end
       4'd11: begin
         ns <= 4'd0;
@@ -240,6 +291,7 @@ module FSM(
         alusrcb <= 2'b00;    
         aluop <= 2'b00;      
         branch <= 1'b0;
+        branchsrc <= 1'b0;
       end
       // ERROR: Unable to recognize state!
       default: begin
@@ -257,6 +309,7 @@ module FSM(
         alusrcb <= 2'b00;    
         aluop <= 2'b00;      
         branch <= 1'b0;
+        branchsrc <= 1'b0;
       end
     endcase
   end

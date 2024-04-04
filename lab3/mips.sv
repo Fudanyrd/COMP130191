@@ -25,6 +25,7 @@ module mips(
   logic[2:0] alucontrol;
   logic[1:0] pcsrc;
   logic pcen;
+  logic branchsrc;
 
   // linking controller, and list variables not found.
   controller ct( // from datapath
@@ -42,7 +43,8 @@ module mips(
     pcsrc,
     pcen,         // used by memory
     iord,
-    memwrite
+    memwrite,
+    branchsrc
   );
 
   // linking datapath:
@@ -59,6 +61,7 @@ module mips(
     alusrca,
     alusrcb,
     alucontrol,
+    branchsrc,
     zero,
     pcsrc,
     pcen,

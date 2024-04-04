@@ -21,7 +21,8 @@ module controller(
   output logic pcen,
   /** output of controller, used by memory */
   output logic iord,
-  output logic memwrite
+  output logic memwrite,
+  output logic branchsrc    // 0: beq, 1: bne
 );
   logic controlone = 1'b1;
   logic[3:0] ns;   // next state
@@ -29,6 +30,13 @@ module controller(
   logic[1:0] aluop;
   logic pcwrite;
   logic branch;
+  logic[5:0] finalFunct;
+
+  itorfunc itor(
+    op,
+    funct,
+    finalFunct
+  );
 
   Register #(4) StateCache(
     clk, reset,
@@ -51,10 +59,11 @@ module controller(
     alusrca,
     alusrcb,
     aluop,
-    branch
+    branch,
+    branchsrc
   );
   aludec decoder(
-    funct,
+    finalFunct,
     aluop,
     alucontrol
   );

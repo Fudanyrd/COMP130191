@@ -18,6 +18,7 @@ module datapath(
   input  logic alusrca,         // use register or pc as input?
   input  logic[1:0] alusrcb,    // use register or immediate as input?
   input  logic[2:0] alucontrol, // alu control signal
+  input  logic branchsrc,       // 0: beq, 1: bne
   output logic zero,
   input  logic[1:0] pcsrc,      // use aluresult or aluout as pc value?
   input  logic pcen,            // enable pc write?
@@ -128,6 +129,7 @@ module datapath(
   alu ALU(
     srca, srcb,
     alucontrol,
+    branchsrc,
     aluresult,
     zero
   );
