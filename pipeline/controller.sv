@@ -13,8 +13,15 @@ module controller(
 );
   logic[1:0] aluop;
   // zero: a.k.a 'EqualD'
+  logic bne;           // is current operation bne?
+  logic[5:0] finalFunct;
 
   /** YOUR CODE HERE */
+  itorfunc itor(
+    op,
+    funct,
+    finalFunct
+  );
   maindec md(
     op,
     memtoreg, memwrite,
@@ -24,9 +31,10 @@ module controller(
     aluop
   );
   aludec ad(
-    funct,
+    finalFunct,
     aluop, 
     alucontrol
   );
-  assign pcsrc = branch & zero;
+  assign bne = (op == 6'b000_101);
+  assign pcsrc = branch & (zero ^ bne);
 endmodule

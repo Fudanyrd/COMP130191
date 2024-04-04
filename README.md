@@ -51,3 +51,12 @@ ac670044
 20020001
 ac020054
 ```
+Also, you may want to test your hardware after adding `ori`, `andi`, `bne`, here is the test program:
+```
+20020005
+34440007
+30450004
+14a00001
+20040001
+ac040054
+```

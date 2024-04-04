@@ -36,6 +36,7 @@ module HazardUnit(
   /** YOUR CODE HERE */
   logic lwstall;
   logic branchstall;
+  // addi = {addi, ori, andi}, i.e. I type instructions
   logic addi;
 
   /** ForwardAE, ForwardBE */
@@ -53,7 +54,8 @@ module HazardUnit(
   forwardbd = (rtd != 5'd0) & (rtd == writeregm) & regwritem;
 
   /** stallF, stallD, FlushE */
-  addi = op == 6'b001_000;
+  addi = (op == 6'b001_000) | (op == 6'b001_100) | (op == 6'b001_101);
+  //              ^^^^^^^^ addi      ^^^^^^^^^andi        ^^^^^^^^^^ori
   /** 
    * NOTE: 
    *
