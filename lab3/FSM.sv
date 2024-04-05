@@ -46,6 +46,7 @@ module FSM(
         alusrcb <= 2'b01;   // set
         aluop <= 2'b00;     // set
         branch <= 1'b0;
+        branchsrc <= 1'b0;
       end
       // State 1: Decode
       4'd1: begin
