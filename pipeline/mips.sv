@@ -9,10 +9,11 @@ module mips(
   input  logic[31:0] instr,
   output logic memwrite,
   output logic[31:0] aluout, writedata,
-  input  logic[31:0] readdata,
-  output logic[2:0] alucontrol  // for debugging
+  input  logic[31:0] readdata
+  // output logic[2:0] alucontrol  // for debugging
 );
   /** YOUR CODE HERE **/
+  logic[2:0] alucontrol;   // maybe unused
   logic jump;
   logic regwrited;
   logic memtoregd;
