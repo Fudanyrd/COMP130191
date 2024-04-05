@@ -29,6 +29,19 @@ Done. Think about how you can leverage figure `7-42` on page `254` to make this 
 **NOTE**: This lab is not named `Lab 4` since our distinguished TAs haven't decide the handout of lab 4.  
 You may look at comments in `pipeline/HazardUnit.sv` and `pipeline/datapath.sv` for some hints. They are largely the pitfalls I've met...
 
+# IO Design
+## Resources
+Documentation to `NEXYS A7` DDR board can be found [here](https://digilent.com/reference/programmable-logic/nexys-a7/reference-manual#seven-segment_display).
+
+## Pitfalls
+<ol>
+  <li>Make sure that you are lightening one digit of the 8 <b>one by one</b>.</li>
+  <li>Both the AN0..7 and the CA..G/DP signals are driven <b>low</b> when active.</li>
+  <li>The lightening frequency should be much smaller than 100MHZ(say, 1KHZ). Otherwise you may find the digits overlapped 
+  with each other. This can be done by using a frequency divisor module.
+  </li>
+</ol>
+
 # Appendix
 Standard Testing File looks like this(you can also find it on page 278):
 ```
@@ -59,4 +72,21 @@ Also, you may want to test your hardware after adding `ori`, `andi`, `bne`, here
 14a00001
 20040001
 ac040054
+```
+
+To test your IO implementation, you should use this `memfile.dat`:
+```
+20100000
+ac100080
+8c110080
+32320002
+1240fffd
+8c130088
+8c14008c
+0293a820
+8c110080
+32320001
+1240fffd
+ac150084
+08000002
 ```
