@@ -16,7 +16,8 @@ module dmemDec(
     input  logic btnR,
     input  logic[15:0] switch,
     output logic[7:0] an,
-    output logic[6:0] a2g
+    output logic[6:0] a2g,
+    output logic dp
 );
   /** YOUR CODE HERE */
 
@@ -63,7 +64,8 @@ module dmemDec(
     (switch),
     (led),
     (an),             // output
-    (a2g)
+    (a2g),
+    dp
   );
 
   always_comb
