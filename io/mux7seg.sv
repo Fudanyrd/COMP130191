@@ -24,7 +24,7 @@ module mux7sig(
 
   logic[7:0] curS;
   logic[7:0] nextS;
-  logic[12:0] digit;
+  logic[4:0] digit;
   logic[6:0] a2gFlipped;
 
   Register #(8) stateReg(
@@ -38,7 +38,7 @@ module mux7sig(
     nextS
   );
   bitmap map(
-    digit[3:0],
+    digit[4:0],
     a2gFlipped 
   );
 
@@ -57,15 +57,15 @@ module mux7sig(
 
   always_comb begin
     case (curS)
-      8'b1111_1110: digit <= (led % 12'd10);
-      8'b1111_1101: digit <= ((led / 12'd10) % 12'd10);
-      8'b1111_1011: digit <= (led / 12'd100);
-      8'b1111_0111: digit <= 12'd10;
-      8'b1110_1111: digit <= {4'b0, (switch[7:0] % 8'd10)};
-      8'b1101_1111: digit <= {4'b0, (switch[7:0] / 8'd10)};
-      8'b1011_1111: digit <= {4'b0, (switch[15:8] % 8'd10)};
-      8'b0111_1111: digit <= {4'b0, (switch[15:8] / 8'd10)};
-      default: digit <= 12'd11;
+      8'b1111_1110: digit <= {1'b0, led[3:0]};
+      8'b1111_1101: digit <= {1'b0, led[7:4]};
+      8'b1111_1011: digit <= {1'b0, led[11:8]};
+      8'b1111_0111: digit <= 5'b1_0000;  // =
+      8'b1110_1111: digit <= {1'b0, switch[3:0]};
+      8'b1101_1111: digit <= {1'b0, switch[7:4]};
+      8'b1011_1111: digit <= {1'b0, switch[11:8]};
+      8'b0111_1111: digit <= {1'b0, switch[15:12]};
+      default: digit <= 5'b1_1111;
     endcase 
   end
 endmodule
