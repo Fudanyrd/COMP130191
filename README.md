@@ -26,8 +26,8 @@ Done. Think about how you can leverage figure `7-42` on page `254` to make this 
 
 # Pipeline
 ![Simulation](pipeline.png)
-**NOTE**: This lab is not named `Lab 4` since our distinguished TAs haven't decide the handout of lab 4.  
-You may look at comments in `pipeline/HazardUnit.sv` and `pipeline/datapath.sv` for some hints. They are largely the pitfalls I've met...
+**NOTE**: This lab is called off😇 I sincerely hope you're happy with that😇😇😇  
+If interested, you may look at comments in `pipeline/HazardUnit.sv` and `pipeline/datapath.sv` for some hints. They are largely the pitfalls I've met...
 
 # IO Design
 ## Resources
